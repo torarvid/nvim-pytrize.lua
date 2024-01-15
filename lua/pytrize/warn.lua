@@ -1,9 +1,10 @@
 local M = {}
 
 M.warn = function(msg)
-    msg = vim.fn.escape(msg, '"'):gsub('\\n', '\n')
-    -- vim.cmd(string.format('echohl WarningMsg | echo "Pytrize Warning: %s" | echohl None', msg))
-    vim.notify(vim.split(string.format("Pytrize Warning: %s", msg), '\n'), vim.log.levels.WARN)
+    local lines = vim.split(string.format("Pytrize Warning: %s", msg), '\n')
+    for _, line in ipairs(lines) do
+        vim.notify(line, vim.log.levels.WARN)
+    end
 end
 
 return M
